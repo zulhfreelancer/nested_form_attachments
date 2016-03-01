@@ -1,0 +1,32 @@
+<%= nested_form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <%= f.fields_for :photos do |photo| %>
+    <%= photo.file_field :file %>
+    <%= photo.object.id %>
+    <% if photo.object.file_url.present? %>
+      <%= image_tag(photo.object.file_url, width: 100) %>
+    <% end %>
+    <%= photo.link_to_remove "Remove" %>
+  <% end %>
+  <%= f.link_to_add "Add", :photos %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,1 @@
+A simple app to demonstrate how carrierwave gem and nested_form gem work together to upload multiple files to Amazon S3 in Rails 4 project
